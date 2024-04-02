@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 APR 24</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+       .main{
+        text-align: center;
+        padding-top: 100px;
+       }
+       input{
+        width: 30%;
+       } 
+       button{
+        margin: 0px 0px 5px 10px;
+       }
+    </style>
+</head>
+<body>
+    
+    <script>
+        var parentdiv = document.createElement("div");
+parentdiv.className = "main"
+
+
+var input_date = document.createElement("input")
+input_date.setAttribute("type","date");
+input_date.id = "dob"
+
+var button = document.createElement("button");
+button.setAttribute("type","button")
+button.className = "btn btn-primary"
+button.innerHTML = "Display Data"
+button.addEventListener("click",displaydata)
+
+let final = document.createElement("div")
+final.setAttribute("class","final")
+final.innerHTML = ""
+
+parentdiv.append(input_date,button,final)
+
+document.body.append(parentdiv)
+
+
+
+function displaydata(){
+
+var input = document.getElementById("dob").value;
+console.log(input);
+if(Date.parse(input)){
+
+var inputdate = new Date(input);
+var currentdate = new Date();
+var millisecdiff = parseInt(currentdate.getTime())-parseInt(inputdate.getTime())
+console.log(millisecdiff);
+var secdiff = Math.floor(millisecdiff/1000);
+console.log(secdiff);
+var mindiff = Math.floor(secdiff/60);
+console.log(mindiff);
+var hoursdiff = Math.floor(mindiff/60);
+console.log(hoursdiff);
+var daydiff = Math.floor(hoursdiff/24);
+console.log(daydiff);
+var yeardiff = currentdate.getFullYear() - inputdate.getFullYear()
+console.log(yeardiff);
+var monthdiff = (yeardiff*12)+(currentdate.getMonth()-inputdate.getMonth())
+console.log(monthdiff);
+final.innerHTML = 
+`Given input date is ${inputdate} <br>
+Year : ${yeardiff} <br>
+Month : ${monthdiff} <br>
+Day : ${daydiff} <br>
+Hour : ${hoursdiff} <br>
+Minute : ${mindiff} <br>
+Second : ${secdiff} <br>
+Millisec : ${millisecdiff} <br> `
+}
+else{
+    console.log("You have Not select Date")
+}
+}
+
+
+    </script>
+</body>
+</html>
